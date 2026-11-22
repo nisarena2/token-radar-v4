@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — which pre-token protocol is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <h1>TOKEN RADAR</h1>
+  <p class="sub">Which pre-token protocol is worth farming next — and what its launch would be worth.</p>
+  <p class="meta" id="meta">Loading…</p>
+</header>
+
+<section id="method" class="panel">
+  <h2>How the value is worked out</h2>
+  <p id="formula"></p>
+  <p id="validation"></p>
+  <p class="note">Age is shown but never priced: an age factor was tested on the time split and dropped — it did not
+  improve out-of-sample misses. A band, not a point: every implied value carries its P25–P75 range from the
+  leave-one-out residuals, because a launch value is a range, not a promise. Nothing here is a hardcoded list of
+  names: the curve, the category effects and the verdicts are all computed from this snapshot's own figures.</p>
+  <p class="note">Farm verdicts are netted to dollars on a $1,000 plan. Slice = your $1,000 share of TVL × implied
+  value × the community's 10% share of a launch — airdrops typically put about 10% of supply to the community,
+  so a farmer's slice is a pro-rata share of that 10%, not of the whole value. Costs: $3 gas per chain the plan
+  actually farms (the main chain and one more, at most 2), 0.3% protocol fees, and 4% a year of forgone T-bill
+  yield over a 90-day farm. FARM clears $10 net and $5 per hands-on hour; THIN clears $0; the rest is SKIP.</p>
+</section>
+
+<section class="panel">
+  <h2>Top 5 by implied value</h2>
+  <div id="top5" class="cards"></div>
+</section>
+
+<section class="panel">
+  <h2>The board</h2>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Filter by name, slug or category…" aria-label="Filter board">
+    <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+    <select id="verdict" aria-label="Verdict">
+      <option value="">All verdicts</option><option>FARM</option><option>THIN</option><option>SKIP</option>
+    </select>
+    <label class="chk"><input id="watch" type="checkbox"> Watchlist only</label>
+    <select id="sort" aria-label="Sort by">
+      <option value="value">Sort: implied value</option><option value="tvl">Sort: TVL</option>
+      <option value="net">Sort: net $</option><option value="perhour">Sort: $ per hour</option>
+      <option value="growth">Sort: 7-day growth</option>
+    </select>
+    <span id="count" class="count"></span>
+  </div>
+  <div class="tablewrap"><table id="board">
+    <thead><tr><th>#</th><th>Protocol</th><th>Category</th><th>TVL</th><th>7D</th><th>No token for</th>
+    <th>Implied value</th><th>$1K slice</th><th>Net</th><th>$/hour</th><th>Verdict</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <p class="warn"><strong>TOKEN TRADES — read before you farm:</strong> a protocol that already records a token
+  that trades is not a launch to farm. Those protocols are kept apart in the scatter below and are never ranked
+  on this board. A protocol on this board records no token; that is the snapshot's record, not proof it has none.</p>
+</section>
+
+<section class="panel">
+  <h2>Detail</h2>
+  <div id="detail"><p class="muted">Click any row on the board to see its farm plan, its value band and its costs.</p></div>
+</section>
+
+<section class="panel">
+  <h2>Comps against the curve</h2>
+  <p class="muted">Each dot is a traded protocol from this snapshot (log scale). The line is the fitted size curve;
+  the shaded band is the P25–P75 leave-one-out range. Small protocols sit far above the line far more often than
+  big ones do — that is why one flat multiple overvalues the giants.</p>
+  <svg id="scatter" viewBox="0 0 640 360" role="img" aria-label="Traded comps against the fitted size curve"></svg>
+</section>
+
+<footer><p>Token Radar v4. Data: DefiLlama snapshot frozen in the competition kit. Implied values are this
+radar's own claim, never the snapshot's and never a promise of a launch.</p></footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
